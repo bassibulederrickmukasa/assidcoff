@@ -1,0 +1,20 @@
+Options -Indexes
+RewriteEngine On
+
+# Handle security for admin, manager, and staff directories
+RewriteCond %{REQUEST_URI} ^/(admin|manager|staff)/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L]
+
+# Protect sensitive files
+<FilesMatch "^(config\.php|database\.php|\.htaccess|.*\.sql)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Allow access to necessary PHP files
+<FilesMatch "^(index\.php|login\.php|dashboard\.php)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
