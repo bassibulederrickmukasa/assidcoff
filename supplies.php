@@ -184,7 +184,7 @@ $isManager = $_SESSION['role'] === 'manager';
                         <td>${supply.staff_name || 'N/A'}</td>
                         <td>${supply.small_boxes}</td>
                         <td>${supply.big_boxes}</td>
-                        <td>UGX ${supply.total_value}</td>
+                        <td>₦${supply.total_value}</td>
                         <td>${supply.comments ? `<div class="comments-container">${supply.comments}</div>` : 'No comments'}</td>
                         <td>
                             <button class="btn btn-sm btn-primary" onclick="openCommentModal(${supply.id})">
@@ -201,7 +201,7 @@ $isManager = $_SESSION['role'] === 'manager';
                         <td></td>
                         <td><strong>${totals.total_small_boxes || 0}</strong></td>
                         <td><strong>${totals.total_big_boxes || 0}</strong></td>
-                        <td><strong>UGX ${totals.total_value || 0}</strong></td>
+                        <td><strong>₦${totals.total_value || 0}</strong></td>
                         <td></td>
                         <td></td>
                     </tr>

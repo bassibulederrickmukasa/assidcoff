@@ -1,0 +1,9 @@
+.env
+/vendor/
+/node_modules/
+/logs/*
+!/logs/.gitkeep
+/uploads/*
+!/uploads/.gitkeep
+.DS_Store
+Thumbs.db
