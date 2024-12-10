@@ -1,4 +1,30 @@
 <?php
+require 'vendor/autoload.php'; // Ensure Composer's autoload is included
+
+use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Exception;
+
+$connectionParams = [
+    'dbname' => 'assidcoff_inventory',
+    'user' => 'assidcoff_inventory_user',
+    'password' => 'brD1go60CJl8uFK0SOlCkEUZdYRSuG8d',
+    'host' => 'dpg-ctal8opu0jms73f0qk00-a.oregon-postgres.render.com',
+    'driver' => 'pdo_pgsql',
+];
+
+try {
+    $conn = DriverManager::getConnection($connectionParams);
+    echo "Connected successfully to the database.";
+} catch (Exception $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
+
+if (in_array('pgsql', PDO::getAvailableDrivers())) {
+    echo "PostgreSQL PDO driver is available.";
+} else {
+    echo "PostgreSQL PDO driver is NOT available.";
+}
+
 // Database configuration
 define('DB_HOST', getenv('DB_HOST') ?: 'dpg-ctal8opu0jms73f0qk00-a.oregon-postgres.render.com');
 define('DB_NAME', getenv('DB_NAME') ?: 'assidcoff_inventory');
@@ -24,59 +50,9 @@ function getDBConnection() {
             PDO::ATTR_EMULATE_PREPARES => false,
         ];
         
+        // Create a new PDO instance
         return new PDO($dsn, DB_USER, DB_PASS, $options);
-    } catch (PDOException $e) {
-        // Log the error
-        error_log(sprintf(
-            "Database connection failed: %s\nTrace: %s",
-            $e->getMessage(),
-            $e->getTraceAsString()
-        ));
-        
-        // In production, don't expose error details
-        if (getenv('APP_ENV') === 'production') {
-            throw new Exception('Database connection failed. Please try again later.');
-        }
-        
-        throw $e;
-    }
-}
-
-// System settings
-define('SYSTEM_NAME', getenv('SYSTEM_NAME') ?: 'Assidcoff Inventory');
-define('COMPANY_NAME', getenv('COMPANY_NAME') ?: 'Assidcoff');
-define('CURRENCY', getenv('CURRENCY') ?: 'UGX');
-define('DATE_FORMAT', getenv('DATE_FORMAT') ?: 'Y-m-d');
-define('TIMEZONE', getenv('TIMEZONE') ?: 'Africa/Kampala');
-
-// Security settings
-define('SESSION_LIFETIME', getenv('SESSION_LIFETIME') ?: 3600); // 1 hour
-define('MAX_LOGIN_ATTEMPTS', getenv('MAX_LOGIN_ATTEMPTS') ?: 5);
-define('LOCKOUT_TIME', getenv('LOCKOUT_TIME') ?: 900); // 15 minutes
-define('PASSWORD_MIN_LENGTH', getenv('PASSWORD_MIN_LENGTH') ?: 8);
-
-// Backup settings
-define('BACKUP_PATH', getenv('BACKUP_PATH') ?: 'backups/');
-define('MAX_BACKUP_FILES', getenv('MAX_BACKUP_FILES') ?: 10);
-
-// Error reporting
-define('ERROR_LOG_PATH', getenv('ERROR_LOG_PATH') ?: 'logs/error.log');
-define('ACTIVITY_LOG_PATH', getenv('ACTIVITY_LOG_PATH') ?: 'logs/activity.log');
-
-// Initialize settings
-date_default_timezone_set(TIMEZONE);
-
-// Session configuration
-if (session_status() == PHP_SESSION_NONE) {
-    ini_set('session.gc_maxlifetime', SESSION_LIFETIME);
-    session_set_cookie_params(SESSION_LIFETIME);
-    session_start();
-}
-
-// Create required directories
-$directories = [BACKUP_PATH, dirname(ERROR_LOG_PATH), dirname(ACTIVITY_LOG_PATH)];
-foreach ($directories as $dir) {
-    if (!file_exists($dir)) {
-        mkdir($dir, 0755, true);
+    } catch (Exception $e) {
+        echo "Database connection error: " . $e->getMessage();
     }
 }
