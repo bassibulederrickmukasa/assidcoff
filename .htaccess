@@ -1,7 +1,7 @@
 Options -Indexes
 RewriteEngine On
 
-# Handle security for admin, manager, and staff directories
+# Protect sensitive directories
 RewriteCond %{REQUEST_URI} ^/(admin|manager|staff)/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -9,7 +9,7 @@ RewriteRule ^(.*)$ index.php [L]
 
 # Protect sensitive files
 <FilesMatch "^(config\.php|database\.php|\.htaccess|.*\.sql)$">
-    Order Allow,Deny
+    Order Deny,Allow
     Deny from all
 </FilesMatch>
 
@@ -18,3 +18,6 @@ RewriteRule ^(.*)$ index.php [L]
     Order Allow,Deny
     Allow from all
 </FilesMatch>
+
+# Redirect old URLs (optional)
+RewriteRule ^old-url\.html$ new-url.php [R=301,L]
