@@ -15,4 +15,10 @@ try {
     // Handle connection error
     echo "Connection failed: " . $e->getMessage();
     exit; // Stop further execution if the connection fails
+}<?php
+require_once 'config/database.php';
+if ($pdo) {
+    echo "Database connection successful!";
+} else {
+    echo "Database connection failed.";
 }
