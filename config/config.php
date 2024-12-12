@@ -1,58 +1,62 @@
 <?php
-require 'vendor/autoload.php'; // Ensure Composer's autoload is included
+require 'vendor/autoload.php';
 
-use Doctrine\DBAL\DriverManager;
-use Doctrine\DBAL\Exception;
-
-$connectionParams = [
-    'dbname' => 'assidcoff_inventory',
-    'user' => 'assidcoff_inventory_user',
-    'password' => 'brD1go60CJl8uFK0SOlCkEUZdYRSuG8d',
-    'host' => 'dpg-ctal8opu0jms73f0qk00-a.oregon-postgres.render.com',
-    'driver' => 'pdo_pgsql',
+// Use environment variables or secure configuration
+$dbConfig = [
+    'host' => getenv('DB_HOST') ?: 'your_host',
+    'dbname' => getenv('DB_NAME') ?: 'your_database',
+    'user' => getenv('DB_USER') ?: 'your_username',
+    'password' => getenv('DB_PASS') ?: 'your_password',
+    'driver' => 'pdo_pgsql', // or 'pdo_mysql' depending on your database
 ];
 
-try {
-    $conn = DriverManager::getConnection($connectionParams);
-    echo "Connected successfully to the database.";
-} catch (Exception $e) {
-    echo "Connection failed: " . $e->getMessage();
-}
-
-if (in_array('pgsql', PDO::getAvailableDrivers())) {
-    echo "PostgreSQL PDO driver is available.";
-} else {
-    echo "PostgreSQL PDO driver is NOT available.";
-}
-
-// Database configuration
-define('DB_HOST', getenv('DB_HOST') ?: 'dpg-ctal8opu0jms73f0qk00-a.oregon-postgres.render.com');
-define('DB_NAME', getenv('DB_NAME') ?: 'assidcoff_inventory');
-define('DB_USER', getenv('DB_USER') ?: 'assidcoff_inventory_user');
-define('DB_PASS', getenv('DB_PASSWORD') ?: 'brD1go60CJl8uFK0SOlCkEUZdYRSuG8d');
-define('DB_PORT', getenv('DB_PORT') ?: '5432');
-define('DB_SSL_MODE', getenv('DB_SSL_MODE') ?: 'require');
-
-// PDO connection string
-function getDBConnection() {
+// Centralized connection function
+function getDatabaseConnection($config) {
     try {
+        // Use output buffering to prevent header issues
+        ob_start();
+
         $dsn = sprintf(
-            "pgsql:host=%s;port=%s;dbname=%s;sslmode=%s",
-            DB_HOST,
-            DB_PORT,
-            DB_NAME,
-            DB_SSL_MODE
+            "%s:host=%s;dbname=%s",
+            str_replace('pdo_', '', $config['driver']), // Remove 'pdo_' prefix
+            $config['host'], 
+            $config['dbname']
         );
-        
+
         $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES => false,
         ];
+
+        $pdo = new PDO($dsn, $config['user'], $config['password'], $options);
         
-        // Create a new PDO instance
-        return new PDO($dsn, DB_USER, DB_PASS, $options);
-    } catch (Exception $e) {
-        echo "Database connection error: " . $e->getMessage();
+        ob_end_clean(); // Clear output buffer
+        return $pdo;
+
+    } catch (PDOException $e) {
+        // Log error securely
+        error_log("Database Connection Error: " . $e->getMessage());
+        die("Database connection failed. Please contact support.");
     }
+}
+
+// Verify database driver
+function checkDatabaseDriver($driver) {
+    $availableDrivers = PDO::getAvailableDrivers();
+    if (!in_array($driver, $availableDrivers)) {
+        error_log("Database driver $driver is not available. Available drivers: " . implode(', ', $availableDrivers));
+        return false;
+    }
+    return true;
+}
+
+// Usage
+try {
+    // Check driver first
+    if (checkDatabaseDriver(str_replace('pdo_', '', $dbConfig['driver']))) {
+        $connection = getDatabaseConnection($dbConfig);
+    }
+} catch (Exception $e) {
+    error_log("Initialization Error: " . $e->getMessage());
 }
