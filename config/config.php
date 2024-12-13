@@ -13,8 +13,8 @@ require_once $vendorPath . '/autoload.php';
 use GuzzleHttp\Client;
 
 // Supabase configuration constants
-define('SUPABASE_URL', getenv('SUPABASE_URL')); // Get from environment variable
-define('SUPABASE_KEY', getenv('SUPABASE_KEY')); // Get from environment variable
+define('SUPABASE_URL', 'https://jlhxbaacznffvtleqmfc.supabase.co'); // Your Supabase URL
+define('SUPABASE_KEY', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpsaHhiYWFjem5mZnZ0bGVxbWZjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQwNTU5ODcsImV4cCI6MjA0OTYzMTk4N30.BtHQhky_Y8p64fEFzRdCEQAf3uAHw8D7NvIocBBJumM'); // Your Supabase anon key
 
 // Initialize Guzzle client
 $client = new Client([
