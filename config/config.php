@@ -13,8 +13,8 @@ require_once $vendorPath . '/autoload.php';
 use GuzzleHttp\Client;
 
 // Supabase configuration constants
-define('SUPABASE_URL', 'https://db.eainxuivwxjmctkwstmq.supabase.co'); // Your Supabase URL
-define('SUPABASE_KEY', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpsaHhiYWFjem5mZnZ0bGVxbWZjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQwNTU5ODcsImV4cCI6MjA0OTYzMTk4N30.BtHQhky_Y8p64fEFzRdCEQAf3uAHw8D7NvIocBBJumM'); // Your Supabase anon key
+define('SUPABASE_URL', 'https://eainxuivwxjmctkwstmq.supabase.co'); // Your Supabase URL
+define('SUPABASE_KEY', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVhaW54dWl2d3hqbWN0a3dzdG1xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQwNDU2MjgsImV4cCI6MjA0OTYyMTYyOH0.kDET7JoEJFaiQqWaimfCkp-F1pYshNbXZGkJW6bz58E'); // Your Supabase anon key
 
 // Initialize Guzzle client
 $client = new Client([
