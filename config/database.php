@@ -1,17 +1,19 @@
 <?php
-require_once 'config.php';
-require 'vendor/autoload.php'; // Ensure Composer's autoload is included
+// config/database.php
 
-use Supabase\SupabaseClient;
-
-// Create a Supabase client
-$supabase = new SupabaseClient(SUPABASE_URL, SUPABASE_KEY);
+// Include the Guzzle client from config.php
+require_once __DIR__ . '/config.php';
 
 // Example of querying data
-$response = $supabase->from('your_table_name')->select('*')->execute();
-if ($response['status'] === 200) {
-    $data = $response['data'];
-    // Process your data as needed
-} else {
-    echo "Error fetching data: " . $response['message'];
+function getDataFromSupabase($tableName) {
+    global $client;
+
+    try {
+        $response = $client->request('GET', "/rest/v1/$tableName");
+        $data = json_decode($response->getBody(), true);
+        return $data;
+    } catch (Exception $e) {
+        echo "Error fetching data: " . $e->getMessage();
+        return null;
+    }
 }
