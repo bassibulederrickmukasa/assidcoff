@@ -29,7 +29,7 @@ $client = new Client([
 function fetchData($tableName) {
     global $client;
 
-    try {
+     try {
         $response = $client->request('GET', "/rest/v1/$tableName");
         $data = json_decode($response->getBody(), true);
         return $data;
