@@ -168,8 +168,8 @@ class ComposerStaticInitce722b97a6034ffdaac981510af2aabe
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -185,8 +185,8 @@ class ComposerStaticInitce722b97a6034ffdaac981510af2aabe
         ),
         'League\\Uri\\' => 
         array (
-            0 => __DIR__ . '/..' . '/league/uri-interfaces/src',
-            1 => __DIR__ . '/..' . '/league/uri/src',
+            0 => __DIR__ . '/..' . '/league/uri/src',
+            1 => __DIR__ . '/..' . '/league/uri-interfaces/src',
         ),
         'Lcobucci\\JWT\\' => 
         array (
@@ -227,10 +227,10 @@ class ComposerStaticInitce722b97a6034ffdaac981510af2aabe
     );
 
     public static $fallbackDirsPsr0 = array (
-        0 => __DIR__ . '/..' . '/supabase/storage-php/src',
-        1 => __DIR__ . '/..' . '/supabase/postgrest-php/src',
-        2 => __DIR__ . '/..' . '/supabase/gotrue-php/src',
-        3 => __DIR__ . '/..' . '/supabase/functions-php/src',
+        0 => __DIR__ . '/..' . '/supabase/functions-php/src',
+        1 => __DIR__ . '/..' . '/supabase/gotrue-php/src',
+        2 => __DIR__ . '/..' . '/supabase/postgrest-php/src',
+        3 => __DIR__ . '/..' . '/supabase/storage-php/src',
         4 => __DIR__ . '/..' . '/supabase/supabase-php/src',
     );
 

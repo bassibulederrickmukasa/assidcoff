@@ -1,17 +1,23 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
 require_once 'config.php';
-require 'vendor/autoload.php'; // Ensure Composer's autoload is included
 
-use Supabase\SupabaseClient;
+use Supabase\Client;  // Verify the correct class name
 
 // Create a Supabase client
-$supabase = new SupabaseClient(SUPABASE_URL, SUPABASE_KEY);
+$supabase = new Client(SUPABASE_URL, SUPABASE_KEY);
 
 // Example of querying data
-$response = $supabase->from('your_table_name')->select('*')->execute();
-if ($response['status'] === 200) {
-    $data = $response['data'];
-    // Process your data as needed
-} else {
-    echo "Error fetching data: " . $response['message'];
+try {
+    $response = $supabase->from('your_table_name')->select('*')->execute();
+    
+    if ($response->status === 200) {
+        $data = $response->data;
+        // Process your data as needed
+    } else {
+        echo "Error fetching data: " . $response->message;
+    }
+} catch (Exception $e) {
+    echo "An error occurred: " . $e->getMessage();
 }
+?>
