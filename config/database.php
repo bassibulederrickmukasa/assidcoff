@@ -1,29 +1,17 @@
 <?php
 require_once 'config.php';
+require 'vendor/autoload.php'; // Ensure Composer's autoload is included
 
-try {
-    $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    // Session security checks
-    if (isset($_SESSION['user_id'])) {
-        if (!isset($_SESSION['last_activity'])) {
-            session_destroy();
-            header("Location: index.php?error=timeout");
-            exit();
-        }
+use Supabase\SupabaseClient;
 
-        if (time() - $_SESSION['last_activity'] > SESSION_LIFETIME) {
-            session_destroy();
-            header("Location: index.php?error=timeout");
-            exit();
-        }
+// Create a Supabase client
+$supabase = new SupabaseClient(SUPABASE_URL, SUPABASE_KEY);
 
-        $_SESSION['last_activity'] = time();
-    }
-
-} catch(PDOException $e) {
-    error_log("Connection failed: " . $e->getMessage());
-    die("Connection failed. Please try again later.");
+// Example of querying data
+$response = $supabase->from('your_table_name')->select('*')->execute();
+if ($response['status'] === 200) {
+    $data = $response['data'];
+    // Process your data as needed
+} else {
+    echo "Error fetching data: " . $response['message'];
 }
-?> 

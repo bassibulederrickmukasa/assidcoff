@@ -1,24 +1,17 @@
 <?php
 require_once 'config.php';
+require 'vendor/autoload.php'; // Ensure Composer's autoload is included
 
-try {
-    // Create a new PDO instance
-    $pdo = new PDO("pgsql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
-    
-    // Set the PDO error mode to exception
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+use Supabase\SupabaseClient;
 
-    // Optional: Set character set
-    $pdo->exec("SET NAMES 'utf8'");
+// Create a Supabase client
+$supabase = new SupabaseClient(SUPABASE_URL, SUPABASE_KEY);
 
-} catch (PDOException $e) {
-    // Handle connection error
-    echo "Connection failed: " . $e->getMessage();
-    exit; // Stop further execution if the connection fails
-}<?php
-require_once 'config/database.php';
-if ($pdo) {
-    echo "Database connection successful!";
+// Example of querying data
+$response = $supabase->from('your_table_name')->select('*')->execute();
+if ($response['status'] === 200) {
+    $data = $response['data'];
+    // Process your data as needed
 } else {
-    echo "Database connection failed.";
+    echo "Error fetching data: " . $response['message'];
 }

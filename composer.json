@@ -1,12 +1,8 @@
 {
   "require": {
-    "php": "^8.0",
-    "ext-pdo": "*",
-    "ext-pdo_pgsql": "*"
-  },
-  "scripts": {
-    "post-install-cmd": [
-      "php artisan migrate --force"
-    ]
+      "php": "^8.0",
+      "ext-pdo": "*",
+      "ext-pdo_pgsql": "*",
+    "supabase/supabase-php": "^0.0.3"
   }
 }
