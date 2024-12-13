@@ -1,8 +1,14 @@
 {
+  "name": "your-project/assidcoff",
+  "description": "Your Project Description",
+  "type": "project",
   "require": {
-      "php": "^8.0",
-      "ext-pdo": "*",
-      "ext-pdo_pgsql": "*",
-    "supabase/supabase-php": "^0.0.3"
+      "supabase/supabase-php": "^0.0.3",
+    "guzzlehttp/guzzle": "^7.5"
+  },
+  "autoload": {
+      "psr-4": {
+          "Supabase\\": "vendor/supabase/supabase-php/src"
+      }
   }
 }

@@ -15,7 +15,7 @@ return array(
     'Supabase\\Storage\\' => array($vendorDir . '/supabase/storage-php/src'),
     'Supabase\\Postgrest\\' => array($vendorDir . '/supabase/postgrest-php/src'),
     'Supabase\\Functions\\' => array($vendorDir . '/supabase/functions-php/src'),
-    'Supabase\\' => array($vendorDir . '/supabase/gotrue-php/src', $vendorDir . '/supabase/supabase-php/src'),
+    'Supabase\\' => array($vendorDir . '/supabase/supabase-php/src', $vendorDir . '/supabase/gotrue-php/src', $vendorDir . '/supabase/supabase-php/src'),
     'StellaMaris\\Clock\\' => array($vendorDir . '/stella-maris/clock/src'),
     'Spatie\\Url\\' => array($vendorDir . '/spatie/url/src'),
     'Spatie\\Macroable\\' => array($vendorDir . '/spatie/macroable/src'),

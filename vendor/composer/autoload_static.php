@@ -119,8 +119,9 @@ class ComposerStaticInitce722b97a6034ffdaac981510af2aabe
         ),
         'Supabase\\' => 
         array (
-            0 => __DIR__ . '/..' . '/supabase/gotrue-php/src',
-            1 => __DIR__ . '/..' . '/supabase/supabase-php/src',
+            0 => __DIR__ . '/..' . '/supabase/supabase-php/src',
+            1 => __DIR__ . '/..' . '/supabase/gotrue-php/src',
+            2 => __DIR__ . '/..' . '/supabase/supabase-php/src',
         ),
         'StellaMaris\\Clock\\' => 
         array (

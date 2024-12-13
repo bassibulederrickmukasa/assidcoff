@@ -1,24 +1,15 @@
 <?php return array(
     'root' => array(
-        'name' => '__root__',
+        'name' => 'your-project/assidcoff',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '3476e79aa91458bb1148ad9ef13d3a4898d99edc',
-        'type' => 'library',
+        'reference' => '34a70a9d12a2ef76d7d8d754b12891366a1abbc5',
+        'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        '__root__' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => '3476e79aa91458bb1148ad9ef13d3a4898d99edc',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../../',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
         'bayfrontmedia/php-mime-types' => array(
             'pretty_version' => 'v2.0.0',
             'version' => '2.0.0.0',
@@ -400,6 +391,15 @@
             'reference' => '1a7ea2afc49c3ee6d87061f5a233e3a035d0eae7',
             'type' => 'library',
             'install_path' => __DIR__ . '/../vlucas/phpdotenv',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'your-project/assidcoff' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '34a70a9d12a2ef76d7d8d754b12891366a1abbc5',
+            'type' => 'project',
+            'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

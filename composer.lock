@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "da2d85146ee0df84a295c06e648f339c",
+    "content-hash": "58030902c01959672719cf88cfa13ee4",
     "packages": [
         {
             "name": "bayfrontmedia/php-mime-types",
@@ -2797,11 +2797,7 @@
     "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {
-        "php": "^8.0",
-        "ext-pdo": "*",
-        "ext-pdo_pgsql": "*"
-    },
+    "platform": {},
     "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
