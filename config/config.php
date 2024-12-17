@@ -11,7 +11,7 @@ use Supabase\SupabaseClient;
 
 // Supabase configuration constants
 define('SUPABASE_URL', 'https://eainxuivwxjmctkwstmq.supabase.co'); // Your Supabase URL
-define('SUPABASE_KEY', 'your_supabase_anon_key'); // Your Supabase anon key
+define('SUPABASE_KEY', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVhaW54dWl2d3hqbWN0a3dzdG1xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQwNDU2MjgsImV4cCI6MjA0OTYyMTYyOH0.kDET7JoEJFaiQqWaimfCkp-F1pYshNbXZGkJW6bz58E'); // Your Supabase anon key
 
 // Initialize Supabase client
 $supabase = new SupabaseClient(SUPABASE_URL, SUPABASE_KEY);
