@@ -20,7 +20,7 @@ define('SUPABASE_KEY', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmF
 $client = new Client([
     'base_uri' => SUPABASE_URL,
     'headers' => [
-        'Authorization' => 'Bearer ' . SUPABASE_KEY,
+        'Authorization' => 'Bearer ' . SUPABASE_KEY, // Ensure this line is present
         'Content-Type' => 'application/json',
     ],
 ]);
