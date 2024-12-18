@@ -3,11 +3,11 @@
         'name' => 'your-project/assidcoff',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'b72c9f53d2b0d03052499f0216102b72d1d2cde2',
+        'reference' => '79a959c2d0a95012d7779cd5a7eb552ab28d4c01',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'dev' => true,
+        'dev' => false,
     ),
     'versions' => array(
         'bayfrontmedia/php-mime-types' => array(
@@ -397,7 +397,7 @@
         'your-project/assidcoff' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'b72c9f53d2b0d03052499f0216102b72d1d2cde2',
+            'reference' => '79a959c2d0a95012d7779cd5a7eb552ab28d4c01',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
