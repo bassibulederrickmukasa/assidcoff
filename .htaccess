@@ -1,23 +1,27 @@
 Options -Indexes
-RewriteEngine On
 
-# Protect sensitive directories
-RewriteCond %{REQUEST_URI} ^/(admin|manager|staff)/
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php [L]
+# Check if mod_rewrite is available (this won't fix the issue on OnRender, but is good practice)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
 
-# Protect sensitive files
+  # Protect sensitive directories
+  RewriteCond %{REQUEST_URI} ^/(admin|manager|staff)/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ index.php [L]
+
+  # Redirect old URLs (optional)
+  RewriteRule ^old-url\.html$ new-url.php [R=301,L] 
+</IfModule>
+
+# Protect sensitive files (This section is outside the IfModule block)
 <FilesMatch "^(config\.php|database\.php|\.htaccess|.*\.sql)$">
     Order Deny,Allow
     Deny from all
 </FilesMatch>
 
-# Allow access to necessary PHP files
+# Allow access to necessary PHP files (This section is also outside the IfModule block)
 <FilesMatch "^(index\.php|login\.php|dashboard\.php)$">
     Order Allow,Deny
     Allow from all
 </FilesMatch>
-
-# Redirect old URLs (optional)
-RewriteRule ^old-url\.html$ new-url.php [R=301,L]
