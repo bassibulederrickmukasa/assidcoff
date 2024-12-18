@@ -3,7 +3,7 @@
         'name' => 'your-project/assidcoff',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'e9bea8ad0c35d22ada641eaf95a45d7e79c60c5a',
+        'reference' => 'b72c9f53d2b0d03052499f0216102b72d1d2cde2',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -397,7 +397,7 @@
         'your-project/assidcoff' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'e9bea8ad0c35d22ada641eaf95a45d7e79c60c5a',
+            'reference' => 'b72c9f53d2b0d03052499f0216102b72d1d2cde2',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
