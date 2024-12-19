@@ -18,7 +18,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 # Workaround for https://github.com/docker/docker-php-extension-install/issues/160
 RUN echo "<?php echo PHP_VERSION; ?>" > /var/www/html/phpinfo.php
 
-    # Copy only composer files first to leverage Docker layer caching
+# Copy only composer files first to leverage Docker layer caching
 COPY composer.json composer.lock ./
 
 # Install Composer dependencies
