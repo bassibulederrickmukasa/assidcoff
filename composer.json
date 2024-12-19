@@ -3,7 +3,7 @@
   "description": "Your Project Description",
   "type": "project",
   "require": {
-      "supabase/supabase-php": "^1.0"
+      "supabase/supabase-php": "^dev-main"
   },
   "autoload": {
       "psr-4": {
