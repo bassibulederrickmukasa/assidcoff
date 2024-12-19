@@ -1,13 +1,13 @@
 {
-  "name": "your-project/assidcoff",
-  "description": "Your Project Description",
-  "type": "project",
-  "require": {
-      "supabase/supabase-php": "^dev-main"
-  },
-  "autoload": {
-      "psr-4": {
-          "Supabase\\": "vendor/supabase/supabase-php/src"
-      }
-  }
+    "name": "your-project/assidcoff",
+    "description": "Your Project Description",
+    "type": "project",
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Supabase\\": "vendor/supabase/supabase-php/src"
+        }
+    }
 }
