@@ -1,29 +1,24 @@
-FROM php:8.1-apache # Or your preferred PHP version
+FROM php:8.2-apache
 
-# Install system dependencies (if needed)
 RUN apt-get update && apt-get install -y \
-    git \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libpq-dev \
     zip \
-    unzip
+    unzip \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd pdo pdo_pgsql
 
-# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-# Set working directory
 WORKDIR /var/www/html
 
-# Copy your application code
 COPY . .
 
-# Install PHP extensions (if needed)
-RUN docker-php-ext-install pdo pdo_mysql
+RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
-# Install project dependencies
-RUN composer install --no-dev --optimize-autoloader
+RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Set correct permissions
-RUN chown -R www-data:www-data /var/www/html/storage
-RUN chown -R www-data:www-data /var/www/html/bootstrap/cache
-
-# Expose port 80
 EXPOSE 80
