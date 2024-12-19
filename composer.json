@@ -1,64 +1,13 @@
-<?php
-
-require 'vendor/autoload.php';
-
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
-
-// ... (createSupabaseClient function from previous example)
-
-function fetchAllFromSupabase(Client $client, string $query): array|null
 {
-    try {
-        $response = $client->get("/rest/v1/{$query}");
-        return json_decode($response->getBody(), true);
-    } catch (GuzzleException $e) {
-        error_log("Supabase Error with query '{$query}': " . $e->getMessage());
-        return null;
+    "name": "your-project/assidcoff",
+    "description": "Your Project Description",
+    "type": "project",
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "YourNamespace\\": "src/"
+        }
     }
-}
-
-// Example usage:
-$supabaseUrl = 'YOUR_SUPABASE_URL';
-$supabaseKey = 'YOUR_SUPABASE_ANON_KEY';
-
-$supabaseClient = createSupabaseClient($supabaseUrl, $supabaseKey);
-
-// Fetch all rows from the 'users' table:
-$users = fetchAllFromSupabase($supabaseClient, 'users');
-if ($users) {
-    print_r($users);
-}
-
-// Fetch all rows from the 'products' table:
-$products = fetchAllFromSupabase($supabaseClient, 'products');
-if ($products) {
-    print_r($products);
-}
-
-// Fetch all rows from the 'orders' table:
-$orders = fetchAllFromSupabase($supabaseClient, 'orders');
-if ($orders) {
-    print_r($orders);
-}
-
-// Example using filters (Supabase query syntax):
-$expensiveProducts = fetchAllFromSupabase($supabaseClient, 'products?price.gt=100');
-if ($expensiveProducts) {
-    print_r($expensiveProducts);
-}
-
-// Example using select to retrieve specific columns
-$userNames = fetchAllFromSupabase($supabaseClient, 'users?select=name');
-
-if ($userNames) {
-    print_r($userNames);
-}
-
-
-// Example using limit and offset for pagination
-$limitedUsers = fetchAllFromSupabase($supabaseClient, 'users?limit=10&offset=20');
-
-if ($limitedUsers) {
-    print_r($limitedUsers);
 }
