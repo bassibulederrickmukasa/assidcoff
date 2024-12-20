@@ -27,8 +27,8 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-di
 # Copy the rest of your application code AFTER composer install
 COPY . .
 
-# Stage 2: Final image (smaller and more secure)
-FROM php:8.2-apache-slim
+# Stage 2: Final image
+FROM php:8.2-apache # Use the correct base image
 
 # Copy application files from the builder stage
 COPY --from=builder /var/www/html /var/www/html
@@ -36,28 +36,22 @@ COPY --from=builder /var/www/html /var/www/html
 # Set working directory
 WORKDIR /var/www/html
 
-# Set proper permissions (if needed - depends on your app)
+# Set proper permissions (if needed)
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Suppress the ServerName warning (optional)
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Expose port 80
-EXPOSE 80
+# Enable rewrite module (the correct way)
+RUN a2enmod rewrite
 
 # Set document root to the public directory (if you have one)
 RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^ index.php [QSA,L]
-</IfModule>
-
-# Enable rewrite module
-RUN a2enmod rewrite
 
 # Restart Apache to apply changes
 RUN service apache2 restart
+
+# Expose port 80
+EXPOSE 80
 
 CMD ["apache2-foreground"]
